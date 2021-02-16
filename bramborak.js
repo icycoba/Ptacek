@@ -158,238 +158,6 @@ client.on('ready', () => {
 })
 
 
-client.on("messageReactionAdd", async (reaction, user)=>{
-    if (reaction.message.partial) await reaction.message.fetch();
-    if (reaction.partial) await reaction.fetch();
-
-    if(user.bot) return;
-    if(!reaction.message.guild) return;
-
-    if(reaction.message.channel.id === '797181534313906227'){
-        try{
-            if(emojiID[0].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.add(roleID[1])
-            }
-            if(emojiID[2].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.add(roleID[3])
-            }
-            if(emojiID[4].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.add(roleID[5])
-            }
-            if(emojiID[6].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.add(roleID[7])
-            }
-            if(emojiID[8].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.add(roleID[9])
-            }
-        } catch{
-            console.error()
-        }
-    }
-})
-
-client.on('messageReactionRemove', async (reaction, user)=>{
-    if(reaction.message.partial) await reaction.message.fetch();
-    if(reaction.partial) await reaction.fetch();
-
-    if(user.bot) return;
-    if(!reaction.message.guild) return;
-
-    try{
-        if(reaction.message.channel.id === '797181534313906227'){
-            if(emojiID[0].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.remove(roleID[1])
-            }
-            if(emojiID[2].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.remove(roleID[3])
-            }
-            if(emojiID[4].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.remove(roleID[5])
-            }
-            if(emojiID[6].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.remove(roleID[7])
-            }
-            if(emojiID[8].includes(reaction.emoji.id)){
-                await reaction.message.guild.members.cache.get(user.id).roles.remove(roleID[9])
-            }
-        }
-    } catch{
-        console.error()
-    }
-})
-
-client.on("guildMemberSpeaking", (member, speaking) => {
-    if(listen == 1){
-        if(speaking.bitfield == 1){
-            if(member.user.id == 265210187936301057){
-                console.log("filipos mluví")
-                const connection = member.voice.channel.join().then(connection =>{
-                    const dispatcher = connection.play('./zvuky/filipNPC.mp3')
-                })
-            }
-
-            if(member.user.id == 265084843077926912){
-                /*265084843077926912
-                let kubaChance = Math.round(Math.random()*100)
-                console.log("kubachance ", kubaChance)
-                if(kubaChance<35){
-                    const connection = member.voice.channel.join().then(connection =>{
-                        const dispatcher = connection.play('./zvuky/cannedresponses/projakuba/halo.mp3')
-                    })
-                } else if(kubaChance>=35 && kubaChance<80){
-                    const connection = member.voice.channel.join().then(connection =>{
-                        const dispatcher = connection.play('./zvuky/cannedresponses/projakuba/jekubatady.mp3')
-                    })
-                } else if(kubaChance>=80 && kubaChance<101){
-                    const connection = member.voice.channel.join().then(connection =>{
-                        const dispatcher = connection.play('./zvuky/cannedresponses/projakuba/slysinekdokubu.mp3')
-                    })
-                }
-                */
-                console.log("kuba mluví")
-                
-            }
-        } else{
-            //filip 
-            if(member.user.id == 265210187936301057){
-                /*
-                if(speakRecently == false){
-                    let randomChance = Math.round(Math.random()*200)
-                    console.log(randomChance)
-                    if(randomChance<=15){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/dostzajimave.mp3')
-                        })
-                    } else if(randomChance>=25 && randomChance<=30){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/pockejfakt.mp3')
-                        })
-                    } else if(randomChance>=40 && randomChance<=45){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/hmmm.mp3')
-                        })
-                    } else if(randomChance>=65 && randomChance<=70){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/tybrdo.mp3')
-                        })
-                    } else if(randomChance>=80 && randomChance<=85){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/tyjo.mp3')
-                        })
-                    } else if(randomChance>=105 && randomChance<=110){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/kuba/aha.mp3')
-                        })
-                    } else if(randomChance>=120 && randomChance<=125){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/kuba/fakt.mp3')
-                        })
-                    } else if(randomChance>=145 && randomChance<=150){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/kuba/megaZajimave.mp3')
-                        })
-                    } else if(randomChance>=160 && randomChance<=165){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/kuba/vyznas.mp3')
-                        })
-                    } else if(randomChance>=185 && randomChance<=190){
-                        const connection = member.voice.channel.join().then(connection =>{
-                            const dispatcher = connection.play('./zvuky/cannedresponses/kuba/nemyslimsi.mp3')
-                        })
-                    }
-                    console.log(speakRecently)
-                    speakRecently=true
-                    console.log(speakRecently)
-                    setTimeout(()=>{
-                        speakRecently = false
-                        console.log("cooldown cooled down peplea")
-                        let randomChance2 = Math.round(Math.random()*100)
-                        console.log(randomChance2)
-                        
-                        if(randomChance2<=5){
-                            const connection = member.voice.channel.join().then(connection =>{
-                                const dispatcher = connection.play('./zvuky/cannedresponses/kuba/hejFilipe.mp3')
-                            })
-                        } if(randomChance2>=95){
-                            const connection = member.voice.channel.join().then(connection =>{
-                                const dispatcher = connection.play('./zvuky/cannedresponses/hejfido.mp3')
-                            })
-                        }
-                    }, 3000)
-                }
-                */
-                const connection = member.voice.channel.join().then(connection =>{
-                    const dispatcher = connection.play('./zvuky/silence.mp3')
-                })
-            }
-
-
-
-            //kuba
-            if(member.user.id == 265084843077926912){
-                console.log("kuba přestal mluvit")
-                
-            }
-        }
-        
-            
-    }
-    
-});
-
-client.on('messageDelete', (deletedMessage) => { 
-    let dM = deletedMessage.content
-    let attach = (deletedMessage.attachments).array()
-    let logChannel = client.channels.cache.get('780790930084462622')
-    let fileDump = client.channels.cache.get('782752881819385876')
-    
-    console.log("Deleted message:",dM);
-    console.log(attach)
-    if(deletedMessage.attachments.size > 0){
-        console.log("case one")
-        let logEmbed = new Discord.MessageEmbed()
-        .setTitle("Smazaná zpráva")
-        .setThumbnail(deletedMessage.author.avatarURL())
-        .setImage(attach[0].proxyURL)
-        .addField("Název souboru", attach[0].name)
-        .addField("Zpráva uživatele", deletedMessage.author.tag)
-        .addField("Smazána z", deletedMessage.channel)
-        
-        let fileDumpEmbed = new Discord.MessageEmbed()
-        .setTitle("Zachován smazaný soubor")
-        .setThumbnail(deletedMessage.author.avatarURL())
-        .addField("Poslal uživatel", deletedMessage.author.tag)
-        .attachFiles(attach[0].proxyURL)
-        
-        logChannel.send(logEmbed)
-        fileDump.send(fileDumpEmbed)
-    }
-    else if((dM != null) && (dM.length < 1024)){
-        console.log("case two")
-        if(deletedMessage.embeds[0]){
-            return console.log("case fuck you")
-        }
-    let logEmbed = new Discord.MessageEmbed()
-        .setTitle("Smazaná zpráva")
-        .setThumbnail(deletedMessage.author.avatarURL())
-        .addField("Zpráva uživatele", deletedMessage.author.tag)
-        .addField("Smazána z", deletedMessage.channel)
-        .addField("Obsah zprávy", dM);
-        logChannel.send(logEmbed)
-    }
-    else{
-        console.log("case three")
-        logChannel.send("Někde nastala chyba při recovery souboru/textu")
-        logChannel.send("Pokusím se poslat, co se nepodařilo v embedu:")
-        logChannel.send(`Zpráva uživatele ${deletedMessage.author} byla vymazána. Obsah zprávy:`)
-        logChannel.send(`${dM}`)
-        return console.log("Chyba při smazání souboru")
-    }
-    
-    
-});
-
-
 
 client.on('message', (receivedMessage) => {
     if (!receivedMessage.content.startsWith(prefix) || receivedMessage.author.bot){
@@ -397,13 +165,6 @@ client.on('message', (receivedMessage) => {
         return;
     }
 
-    let logChan = client.channels.cache.get('780790930084462622')
-
-    if(receivedMessage.channel.type == 'dm'){
-        logChan.send(receivedMessage.content)
-        logChan.send(receivedMessage.author.tag)
-        return;
-    }
 
     const args = receivedMessage.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
@@ -463,16 +224,6 @@ client.on('message', (receivedMessage) => {
         }
     }
 
-    // zpráva = 'hej bramborák představ streamera'          ========= DEBUG, SMAZAT =========
-    else if (receivedMessage.content === 'hej bramborák představ streamera'){
-        if (receivedMessage.member.voice.channel){
-            const connection = receivedMessage.member.voice.channel.join().then(connection =>{
-                const dispatcher = connection.play('./zvuky/streamerS.mp3')
-            });
-        } else{
-            receivedMessage.reply('musíš být ve stejném voicu')
-        }
-    }
 
     // zpráva = 'ukaž ptáčka'
     else if (receivedMessage.content === 'hej bramborák ukaž nám ptáčka'){
@@ -609,29 +360,6 @@ client.on('message', (receivedMessage) => {
         }
     }
 
-    // icycoba only commands, do not touch
-    else if (command === 'poslouchej'){
-        if(receivedMessage.author.id === '174960316868853762'){
-        listen = 1
-        console.log(listen)
-        }
-    }
-    else if (command === 'neposlouchej'){
-        if(receivedMessage.author.id === '174960316868853762'){
-            listen = 0
-            console.log(listen)
-        }
-    }
-    else if (command === 'secretjoin'){
-        if(receivedMessage.author.id === '174960316868853762'){
-            receivedMessage.member.voice.channel.join()
-            if (receivedMessage.member.voice.channel){
-                const connection = receivedMessage.member.voice.channel.join().then(connection =>{
-                    const dispatcher = connection.play('./zvuky/silence.mp3')
-                });
-            }
-        }
-    }
 
     // weirdchomp ascii; icycoba/krocan only
     else if (command === 'hosihosicotudelate'){
@@ -647,14 +375,10 @@ client.on('message', (receivedMessage) => {
 
     // kolik měří
     else if (command === 'kolik'){
-        if(args[0] === 'měrží'){
-            if(receivedMessage.author.id === '174960316868853762'){
-                receivedMessage.reply('měří asi 1000000')
-            }
-        }
         //console.log(args[0])
         //console.log(args[0].toLowerCase())
-        
+    
+
         console.log(args[0])
         args[0] = args[0].slice(0,4)
         console.log(args[0])
@@ -824,26 +548,6 @@ client.on('message', (receivedMessage) => {
         }
     }
 
-    // icycoba only command do not touch
-    else if (command === 'hejbramborakreknitohle'){
-        if(receivedMessage.author.id === '174960316868853762'){
-            console.log(args[0])
-            let tarChannel = client.channels.cache.get(`${args[0]}`)
-            if(!args[1]){
-                return receivedMessage.channel.send(`Nerozumím`)
-            }
-            var tmp = args[1]
-            var i = 2
-            while(args[i] != null){
-                tmp = tmp + " " + args[i]
-                i++
-                console.log("while cyklus")
-            }
-
-            //receivedMessage.channel.send(`${tmp}`)
-            tarChannel.send(`${tmp}`)
-        }
-    }
 
     // maxdelka
     else if (command === 'maxdelka'){
